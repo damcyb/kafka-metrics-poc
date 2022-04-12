@@ -27,11 +27,33 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.rmi.port=1099"
+      JMX_PORT: 1099
       KAFKA_BROKER_ID: 1
       KAFKA_CREATE_TOPICS: "test-topic-100:1:1"
     restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - kafka_net
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_IMAGE_VERSION}
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_IMAGE_VERSION}
+    command: "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
 networks:
   kafka_net:
     driver: bridge
+
+volumes:
+  grafana-storage:
