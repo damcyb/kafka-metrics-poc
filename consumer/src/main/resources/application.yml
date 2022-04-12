@@ -1,0 +1,7 @@
+app:
+  kafka:
+    group-id: group-3
+    bootstrap-servers: localhost:9092
+server:
+  port: "8082"
+
