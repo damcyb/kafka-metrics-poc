@@ -10,7 +10,8 @@ public class MessageConfiguration {
     @Bean
     public MessageFacade messageFacade(
             @Qualifier("kafkaAsyncEventPublisher")
-            final EventPublisher eventPublisher) {
+            final EventPublisher eventPublisher
+    ) {
         return new MessageFacade(eventPublisher);
     }
 }

@@ -33,4 +33,15 @@ public class KafkaProperties {
 
         return properties;
     }
+
+    Map<String, Object> getSafeSettings() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        /* below safe producer settings, additionally use synchronous producer type */
+        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true"); //acks is set to all after enable idempotence
+        properties.put(ProducerConfig.RETRIES_CONFIG, Integer.MAX_VALUE); //see also delivery.timeout.ms
+
+        return properties;
+    }
 }

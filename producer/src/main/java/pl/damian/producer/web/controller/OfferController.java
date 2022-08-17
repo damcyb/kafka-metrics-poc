@@ -5,10 +5,7 @@ import lombok.experimental.FieldDefaults;
 import model.offer.OfferDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.damian.data.model.CreateOfferRequestModel;
 import pl.damian.data.model.CreateOfferResponseModel;
 import pl.damian.producer.web.service.OfferService;
@@ -24,6 +21,8 @@ import static lombok.AccessLevel.PRIVATE;
 public class OfferController {
 
     OfferService offerService;
+
+    @GetMapping
 
     @PostMapping
     @RequestMapping("/offer")

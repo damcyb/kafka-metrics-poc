@@ -13,6 +13,7 @@
         <module>producer</module>
         <module>cdm</module>
         <module>consumer</module>
+        <module>safeConsumer</module>
     </modules>
 
     <properties>
@@ -36,5 +37,24 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.2.7.RELEASE</version>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
 
 </project>

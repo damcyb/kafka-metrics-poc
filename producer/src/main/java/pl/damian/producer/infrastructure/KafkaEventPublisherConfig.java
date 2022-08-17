@@ -13,4 +13,9 @@ public class KafkaEventPublisherConfig {
     EventPublisher kafkaAsyncEventPublisher(final KafkaTemplate<String, InternalEvent> kafkaTemplate) {
         return new KafkaAsyncEventPublisher(kafkaTemplate);
     }
+
+    @Bean
+    EventPublisher kafkaSyncEventPublisher(final KafkaTemplate<String, InternalEvent> kafkaTemplate) {
+        return new KafkaSyncEventPublisher(kafkaTemplate);
+    }
 }

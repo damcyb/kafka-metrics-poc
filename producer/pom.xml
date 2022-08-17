@@ -57,10 +57,11 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
             <version>1.6.3</version>
         </dependency>
-        <!-- acturator -->
+        <!-- actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
+
 </project>

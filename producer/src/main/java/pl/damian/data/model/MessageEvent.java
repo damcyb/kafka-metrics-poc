@@ -5,6 +5,7 @@ import model.offer.OfferDto;
 import pl.damian.producer.domain.InternalEvent;
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.UUID;
 
 @Value
