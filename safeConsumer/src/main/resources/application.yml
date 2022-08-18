@@ -1,7 +1,7 @@
 app:
   kafka:
-    group-id: group-3
-    bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
+    group-id: group-2
+    bootstrap-servers: localhost:9092
 
 spring:
   datasource:
