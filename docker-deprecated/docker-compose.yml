@@ -5,25 +5,53 @@ services:
     ports:
       - "2181:2181"
 
-  kafka-cluster:
-    image: dockerpromkafka:latest
+  kafka-cluster1:
+    image: kafka_jmx:latest
     links:
       - zookeeper
     ports:
       - "9092:9092"
-      - "10990:10990"
+      - "1099:1099"
     environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
       HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       EXTRA_ARGS: -javaagent:/opt/kafka/libs/jmx_prometheus_javaagent.jar=7070:/opt/kafka/libs/kafka.yml
       KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS: 16000
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.108:9092
       KAFKA_LISTENERS: PLAINTEXT://:9092
       KAFKA_ADVERTISED_PORT: 9092
+#      KAFKA_PORT: 9092
+      KAFKA_BROKER_ID: 1
       JMX_PORT: 1099
       KAFKA_CREATE_TOPICS: "test-topic-100:1:1"
-      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.rmi.port=1099"
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=192.168.99.108 -Dcom.sun.management.jmxremote.rmi.port=1099"
 #    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  kafka-cluster2:
+    image: kafka_jmx:latest
+    links:
+      - zookeeper
+    ports:
+      - "9093:9093"
+      - "10990:10990"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      EXTRA_ARGS: -javaagent:/opt/kafka/libs/jmx_prometheus_javaagent.jar=7070:/opt/kafka/libs/kafka.yml
+      KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS: 16000
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.108:9093
+      KAFKA_LISTENERS: PLAINTEXT://:9093
+      KAFKA_ADVERTISED_PORT: 9093
+      #      KAFKA_PORT: 9092
+      KAFKA_BROKER_ID: 1
+      JMX_PORT: 10990
+      KAFKA_CREATE_TOPICS: "test-topic-100:1:1"
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=192.168.99.108 -Dcom.sun.management.jmxremote.rmi.port=10990"
+    #    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -58,8 +86,8 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     links:
-      - kafka-cluster
-#      - kafka-cluster-2
+      - kafka-cluster1
+      - kafka-cluster2
 
   grafana:
     image: grafana/grafana:${GRAFANA_IMAGE_VERSION}
@@ -68,29 +96,29 @@ services:
     volumes:
       - grafana-storage:/var/lib/grafana
 
-  postgres:
-    image: postgres
-    hostname: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: dbcache
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    restart: unless-stopped
-
-  pgadmin:
-    image: dpage/pgadmin4
-    depends_on:
-      - postgres
-    ports:
-      - "5555:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.pl
-      PGADMIN_DEFAULT_PASSWORD: admin
-    restart: unless-stopped
+#  postgres:
+#    image: postgres
+#    hostname: postgres
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_DB: dbcache
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#    volumes:
+#      - postgres-data:/var/lib/postgresql/data
+#    restart: unless-stopped
+#
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    depends_on:
+#      - postgres
+#    ports:
+#      - "5555:80"
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: admin@admin.pl
+#      PGADMIN_DEFAULT_PASSWORD: admin
+#    restart: unless-stopped
 
 volumes:
   grafana-storage:
