@@ -44,4 +44,12 @@ public class KafkaProperties {
 
         return properties;
     }
+
+    public Map<String, Object> getSettingsForCase_1Config_1() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "0");
+
+        return properties;
+    }
 }

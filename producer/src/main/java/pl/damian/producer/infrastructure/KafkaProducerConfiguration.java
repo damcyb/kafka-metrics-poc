@@ -30,14 +30,14 @@ public class KafkaProducerConfiguration {
     public KafkaTemplate<String, InternalEvent> kafkaTemplate(
         final ProducerFactory<String, InternalEvent> producerFactory
     ){
-        return new KafkaTemplate<>(producerFactory);
+        return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(getProducerConfig()));
     }
 
-    @Bean
-    public ProducerFactory<String, InternalEvent> producerFactory() {
-        final var producerConfig = getProducerConfig();
-        return new DefaultKafkaProducerFactory<>(producerConfig);
-    }
+//    @Bean
+//    public ProducerFactory<String, InternalEvent> producerFactory() {
+//        final var producerConfig = getProducerConfig();
+//        return new DefaultKafkaProducerFactory<>(producerConfig);
+//    }
 
     private Map<String, Object> getProducerConfig() {
         final Map<String, Object> properties = new HashMap<>();

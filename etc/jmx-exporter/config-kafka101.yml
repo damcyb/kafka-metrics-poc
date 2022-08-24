@@ -46,12 +46,25 @@ whitelistObjectNames:
   - kafka.network:type=Processor,*
   - kafka.network:type=SocketServer,*
   - kafka.network:type=RequestMetrics,*
-  #  - kafka.network:type=RequestMetrics,name=*,request=OffsetCommit,version=*
-  #  - kafka.network:type=RequestMetrics,name=*,request=FetchConsumer,version=*
-  #  - kafka.network:type=RequestMetrics,name=*,request=FetchFollower,version=*
-  #  - kafka.network:type=RequestMetrics,name=*,request=Produce,version=*
-  #  - kafka.network:type=RequestMetrics,name=*,request=Metadata,version=*
   - kafka.coordinator.group:*
+
+  - kafka.network:type=RequestMetrics,name=*,request=OffsetCommit,version=*
+  - kafka.network:type=RequestMetrics,name=*,request=FetchConsumer,version=*
+  - kafka.network:type=RequestMetrics,name=*,request=FetchFollower,version=*
+  - kafka.network:type=RequestMetrics,name=*,request=Produce,version=*
+  - kafka.network:type=RequestMetrics,name=*,request=Metadata,version=*
+
+  - kafka.server:type=BrokerTopicMetrics,name=TotalFetchRequestsPerSec,*
+  - kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec,*
+  - kafka.server:type=BrokerTopicMetrics,name=FailedProduceRequestsPerSec,*
+  - kafka.server:type=BrokerTopicMetrics,name=FailedFetchRequestsPerSec,*
+  - kafka.server:type=BrokerTopicMetrics,name=BytesRejectedPerSec,*
+  - kafka.log:type=Log,name=LogEndOffset,*
+  - kafka.log:type=Log,name=LogStartOffset,*
+  - kafka.cluster:type=Partition,name=InSyncReplicasCount,*
+  - kafka.cluster:type=Partition,name=LastStableOffsetLag,*
+  - kafka.cluster:type=Partition,name=ReplicasCounts,*
+  - kafka.cluster:type=Partition,name=UnderReplicated,*
 blacklistObjectNames:
   - java.lang:type=ClassLoading,*
   - java.lang:type=Compilation,*
@@ -59,17 +72,17 @@ blacklistObjectNames:
   - kafka.utils:*
   - kafka.controller:type=ControllerChannelManager,name=QueueSize,*
   # Following metrics are exposed per topics
-  - kafka.log:type=Log,name=LogEndOffset,*
-  - kafka.log:type=Log,name=LogStartOffset,*
-  - kafka.cluster:type=Partition,name=InSyncReplicasCount,*
-  - kafka.cluster:type=Partition,name=LastStableOffsetLag,*
-  - kafka.cluster:type=Partition,name=ReplicasCounts,*
-  - kafka.cluster:type=Partition,name=UnderReplicated,*
-  - kafka.server:type=BrokerTopicMetrics,name=TotalFetchRequestsPerSec,*
-  - kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec,*
-  - kafka.server:type=BrokerTopicMetrics,name=FailedProduceRequestsPerSec,*
-  - kafka.server:type=BrokerTopicMetrics,name=FailedFetchRequestsPerSec,*
-  - kafka.server:type=BrokerTopicMetrics,name=BytesRejectedPerSec,*
+#  - kafka.log:type=Log,name=LogEndOffset,*
+#  - kafka.log:type=Log,name=LogStartOffset,*
+#  - kafka.cluster:type=Partition,name=InSyncReplicasCount,*
+#  - kafka.cluster:type=Partition,name=LastStableOffsetLag,*
+#  - kafka.cluster:type=Partition,name=ReplicasCounts,*
+#  - kafka.cluster:type=Partition,name=UnderReplicated,*
+#  - kafka.server:type=BrokerTopicMetrics,name=TotalFetchRequestsPerSec,*
+#  - kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec,*
+#  - kafka.server:type=BrokerTopicMetrics,name=FailedProduceRequestsPerSec,*
+#  - kafka.server:type=BrokerTopicMetrics,name=FailedFetchRequestsPerSec,*
+#  - kafka.server:type=BrokerTopicMetrics,name=BytesRejectedPerSec,*
 
 rules:
   #-------------------------------------------------------------------------------------------------------

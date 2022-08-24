@@ -2,7 +2,7 @@ POST http://localhost:8081/producer/offer
 Content-Type: application/json
 
 {
-  "offerId": "89165455-1749-48dd-b458-89f2b8893fb8",
+  "offerId": "89165455-1749-48dd-b458-89f2b8893fb0",
   "title": "Rome 2 Total War",
   "price": 120,
   "currency": "PLN"
