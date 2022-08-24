@@ -52,4 +52,13 @@ public class KafkaProperties {
 
         return properties;
     }
+
+    public Map<String, Object> getSettingsForCase_1Config_2() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "0");
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
+
+        return properties;
+    }
 }

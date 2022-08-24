@@ -6,6 +6,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import pl.damian.producer.domain.EventPublisher;
 import pl.damian.producer.domain.InternalEvent;
 import pl.damian.producer.infrastructure.publishers.KafkaEventPublisherCase1Config1;
+import pl.damian.producer.infrastructure.publishers.KafkaEventPublisherCase1Config2;
 
 @Configuration
 public class KafkaEventPublisherConfig {
@@ -23,5 +24,10 @@ public class KafkaEventPublisherConfig {
     @Bean
     EventPublisher kafkaEventPublisherCase1Config1(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config1) {
         return new KafkaEventPublisherCase1Config1(kafkaTemplateCase1Config1);
+    }
+
+    @Bean
+    EventPublisher kafkaEventPublisherCase1Config2(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config2) {
+        return new KafkaEventPublisherCase1Config2(kafkaTemplateCase1Config2);
     }
 }

@@ -14,8 +14,14 @@ public class MessageConfiguration {
             @Qualifier("kafkaAsyncEventPublisher")
             final EventPublisher eventPublisher,
             @Qualifier("kafkaEventPublisherCase1Config1")
-            final EventPublisher kafkaEventPublisherCase1Config1
+            final EventPublisher kafkaEventPublisherCase1Config1,
+            @Qualifier("kafkaEventPublisherCase1Config2")
+            final EventPublisher kafkaEventPublisherCase1Config2
     ) {
-        return new MessageFacadeImpl(Arrays.asList(eventPublisher, kafkaEventPublisherCase1Config1));
+        return new MessageFacadeImpl(Arrays.asList(
+                eventPublisher,
+                kafkaEventPublisherCase1Config1,
+                kafkaEventPublisherCase1Config2
+        ));
     }
 }
