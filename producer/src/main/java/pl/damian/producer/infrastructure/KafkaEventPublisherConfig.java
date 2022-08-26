@@ -11,6 +11,7 @@ import pl.damian.producer.infrastructure.publishers.KafkaEventPublisherCase1Conf
 @Configuration
 public class KafkaEventPublisherConfig {
 
+    //test
     @Bean
     EventPublisher kafkaAsyncEventPublisher(final KafkaTemplate<String, InternalEvent> kafkaTemplate) {
         return new KafkaAsyncEventPublisher(kafkaTemplate);
