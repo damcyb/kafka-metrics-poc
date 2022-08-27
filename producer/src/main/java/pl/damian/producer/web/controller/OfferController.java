@@ -22,8 +22,6 @@ public class OfferController {
 
     OfferService offerService;
 
-    @GetMapping
-
     @PostMapping
     @RequestMapping("/offer")
     public ResponseEntity<CreateOfferResponseModel> createOffer(
@@ -31,6 +29,39 @@ public class OfferController {
     {
         OfferDto offerDto = fromCreateOfferRequestToDto(requestModel);
         offerService.createOfferAsync(offerDto);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @PostMapping
+    @RequestMapping("/offer/{number}")
+    public ResponseEntity<CreateOfferResponseModel> createOffers(
+            @RequestBody CreateOfferRequestModel requestModel,
+            @PathVariable int number)
+    {
+        OfferDto offerDto = fromCreateOfferRequestToDto(requestModel);
+        for (int i = 0; i < number; i++) {
+            offerService.createOfferAsync(offerDto);
+        }
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @PostMapping
+    @RequestMapping("/offer/{number}/{interval}/{times}")
+    public ResponseEntity<CreateOfferResponseModel> createOffersWithInterval(
+            @RequestBody CreateOfferRequestModel requestModel,
+            @PathVariable int number,
+            @PathVariable int interval,
+            @PathVariable int times) throws InterruptedException {
+        OfferDto offerDto = fromCreateOfferRequestToDto(requestModel);
+
+        for (int j = 0; j < times; j++) {
+            for (int i = 0; i < number; i++) {
+                offerService.createOfferAsync(offerDto);
+            }
+            Thread.sleep(interval);
+        }
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

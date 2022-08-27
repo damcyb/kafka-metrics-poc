@@ -10,4 +10,26 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:8081/producer/offer/1000
+Content-Type: application/json
+
+{
+  "offerId": "89165455-1749-48dd-b458-89f2b8893fb0",
+  "title": "Rome 2 Total War",
+  "price": 120,
+  "currency": "PLN"
+}
+
+###
+
+POST http://localhost:8081/producer/offer/10000/1000/600
+Content-Type: application/json
+
+{
+  "offerId": "89165455-1749-48dd-b458-89f2b8893fb0",
+  "title": "Rome 2 Total War",
+  "price": 120,
+  "currency": "PLN"
+}
+
 
