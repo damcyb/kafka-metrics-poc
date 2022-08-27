@@ -61,4 +61,78 @@ public class KafkaProperties {
 
         return properties;
     }
+
+    public Map<String, Object> getSettingsForCase_1Config_3() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "0");
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_1Config_4() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "0");
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_1Config_5() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "0");
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_1Config_6() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "1");
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_1Config_7() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "1");
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_1Config_8() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "all");
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_1Config_9() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "all");
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
+
+        return properties;
+    }
+
 }
