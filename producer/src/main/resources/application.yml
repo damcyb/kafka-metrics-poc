@@ -1,6 +1,7 @@
 app:
   kafka:
-    bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
+#    bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
+    bootstrap-servers: localhost:9092
 server:
   port: "8081"
 management:
