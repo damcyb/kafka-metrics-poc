@@ -1,11 +1,14 @@
 app:
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
 server:
   port: "8081"
 management:
   endpoints:
     web:
+      exposure:
+        include: "*"
+    jmx:
       exposure:
         include: "*"
   metrics:
@@ -14,3 +17,20 @@ management:
         http:
           server:
             requests: true
+    export:
+      jmx:
+        enabled: true
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+spring:
+  jmx:
+    enabled: true
+
+
+

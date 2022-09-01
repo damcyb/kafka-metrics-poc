@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8081/producer/offer/10000/1000/600
+POST http://localhost:8081/producer/offer/100/1000/600
 Content-Type: application/json
 
 {

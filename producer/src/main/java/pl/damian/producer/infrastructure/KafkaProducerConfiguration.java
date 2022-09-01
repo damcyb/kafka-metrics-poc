@@ -1,5 +1,6 @@
 package pl.damian.producer.infrastructure;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.MicrometerProducerListener;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import pl.damian.producer.domain.InternalEvent;
@@ -28,9 +30,12 @@ public class KafkaProducerConfiguration {
 
     @Bean("kafkaTemplate")
     public KafkaTemplate<String, InternalEvent> kafkaTemplate(
-        final ProducerFactory<String, InternalEvent> producerFactory
+            final ProducerFactory<String, InternalEvent> producerFactory,
+            final MeterRegistry meterRegistry
     ){
-        return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(getProducerConfig()));
+        var defaultKafkaProducerFactory =  new DefaultKafkaProducerFactory<String, InternalEvent>(getProducerConfig());
+        defaultKafkaProducerFactory.addListener(new MicrometerProducerListener<>(meterRegistry));
+        return new KafkaTemplate<>(defaultKafkaProducerFactory);
     }
 
 //    @Bean

@@ -1,7 +1,37 @@
 app:
   kafka:
     group-id: group-3
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
 server:
   port: "8082"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    jmx:
+      exposure:
+        include: "*"
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    export:
+      jmx:
+        enabled: true
+      prometheus:
+        enabled: true
+        pushgateway:
+          enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+spring:
+  jmx:
+    enabled: true
+
+
 

@@ -21,6 +21,7 @@ public class KafkaAsyncEventPublisher implements EventPublisher<InternalEvent> {
 
     @Override
     public void send(InternalEvent event) {
+
         try {
             final var producerRecord = new ProducerRecord<>(MESSAGE_READ_EVENTS, event.getKey(), event);
             kafkaTemplate.send(producerRecord);

@@ -33,7 +33,8 @@ public abstract class AbstractKafkaProducerConfigurationCaseConfig {
         properties.put(ProducerConfig.RETRIES_CONFIG, 1);
         properties.put(ProducerConfig.RECONNECT_BACKOFF_MS_CONFIG, "5000");
         properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, "5000");
-
+        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG,
+                "com.hortonworks.smm.kafka.monitoring.interceptors.MonitoringProducerInterceptor");
         return properties;
     }
 

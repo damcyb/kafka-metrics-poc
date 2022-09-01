@@ -1,5 +1,6 @@
 package pl.damian.consumer.infrastructure;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.MicrometerConsumerListener;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import pl.damian.data.model.MessageEvent;
@@ -30,17 +32,24 @@ class KafkaConsumerConfiguration {
 
     KafkaProperties kafkaProperties;
 
+
     @Bean(OfferMessageConst.Listeners.MESSAGE_READ_LISTENER_CONTAINER_FACTORY)
-    public ConcurrentKafkaListenerContainerFactory<String, MessageEvent> kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, MessageEvent> kafkaListenerContainerFactory(
+            final MeterRegistry meterRegistry
+    ) {
         var factory = new ConcurrentKafkaListenerContainerFactory<String, MessageEvent>();
-        factory.setConsumerFactory(consumerFactory());
+        factory.setConsumerFactory(consumerFactory(meterRegistry));
         return factory;
     }
 
     @Bean
-    public ConsumerFactory<String, MessageEvent> consumerFactory() {
+    public ConsumerFactory<String, MessageEvent> consumerFactory(
+            final MeterRegistry meterRegistry
+            ) {
         final var consumerConfig = getConsumerConfig();
-        return new DefaultKafkaConsumerFactory<>(consumerConfig);
+        var defaultKafkaConsumerFactory = new DefaultKafkaConsumerFactory<String, MessageEvent>(consumerConfig);
+        defaultKafkaConsumerFactory.addListener(new MicrometerConsumerListener<>(meterRegistry));
+        return defaultKafkaConsumerFactory;
     }
 
     private Map<String, Object> getConsumerConfig() {
