@@ -32,7 +32,9 @@ public class MessageConfiguration {
             @Qualifier("kafkaEventPublisherCase1Config9")
             final EventPublisher kafkaEventPublisherCase1Config9,
             @Qualifier("kafkaEventPublisherCase2Config1")
-            final EventPublisher kafkaEventPublisherCase2Config1
+            final EventPublisher kafkaEventPublisherCase2Config1,
+            @Qualifier("kafkaEventPublisherCase2Config2")
+            final EventPublisher kafkaEventPublisherCase2Config2
     ) {
         return new MessageFacadeImpl(Arrays.asList(
 //                eventPublisher,
@@ -44,8 +46,9 @@ public class MessageConfiguration {
 //                kafkaEventPublisherCase1Config6,
 //                kafkaEventPublisherCase1Config7,
 //                kafkaEventPublisherCase1Config8,
-//                kafkaEventPublisherCase1Config9
-        kafkaEventPublisherCase2Config1
+//                kafkaEventPublisherCase1Config9,
+//                kafkaEventPublisherCase2Config1,
+            kafkaEventPublisherCase2Config2
         ));
     }
 }

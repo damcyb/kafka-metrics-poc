@@ -15,14 +15,14 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.ExecutionException;
 
-import static pl.damian.producer.infrastructure.OfferMessageConst.Topics.case_2_config_1;
+import static pl.damian.producer.infrastructure.OfferMessageConst.Topics.case_2_config_2;
 
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class KafkaEventPublisherCase2Config1 implements EventPublisher<InternalEvent> {
+public class KafkaEventPublisherCase2Config2 implements EventPublisher<InternalEvent> {
 
-    KafkaTemplate<String, InternalEvent> kafkaTemplateCase2Config1;
+    KafkaTemplate<String, InternalEvent> kafkaTemplateCase2Config2;
 
     @Override
     public void send(InternalEvent event) {
@@ -31,9 +31,9 @@ public class KafkaEventPublisherCase2Config1 implements EventPublisher<InternalE
             Instant start = Instant.now();
 
             for (int i = 0; i < number.intValue(); i++) {
-                final var producerRecord = new ProducerRecord<>(case_2_config_1, event.getKey(), event);
-                var sendResult = kafkaTemplateCase2Config1.send(producerRecord);
-                kafkaTemplateCase2Config1.flush();
+                final var producerRecord = new ProducerRecord<>(case_2_config_2, event.getKey(), event);
+                final var sendResult = kafkaTemplateCase2Config2.send(producerRecord);
+                kafkaTemplateCase2Config2.flush();
                 sendResult.get();
             }
 
@@ -41,7 +41,7 @@ public class KafkaEventPublisherCase2Config1 implements EventPublisher<InternalE
             long timeElapsed = Duration.between(start, finish).toMillis();
             log.info("Time Elapsed in ms: " + timeElapsed);
 //            log.info("Send " + number.divide(new BigInteger(String.valueOf(timeElapsed))).multiply(new BigInteger("1000")) + " messages per second");
-            log.info("Message was sent CASE2CONFIG1");
+            log.info("Message was sent CASE2CONFIG2");
         } catch (final InterruptedException e) {
             Thread.currentThread().interrupt();
             log.error("Sending interrupted", e);

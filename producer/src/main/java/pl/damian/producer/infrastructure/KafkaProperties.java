@@ -138,7 +138,16 @@ public class KafkaProperties {
     public Map<String, Object> getSettingsForCase_2Config_1() {
         final Map<String, Object> properties = new HashMap<>();
 
-        properties.put(ProducerConfig.ACKS_CONFIG, "0");
+        properties.put(ProducerConfig.ACKS_CONFIG, "1");
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_2Config_2() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "1");
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
 
         return properties;
     }
