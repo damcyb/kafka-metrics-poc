@@ -77,7 +77,7 @@ public class KafkaProperties {
         properties.put(ProducerConfig.ACKS_CONFIG, "0");
         properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
-        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33_554_432);
         properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
 
         return properties;
@@ -89,7 +89,7 @@ public class KafkaProperties {
         properties.put(ProducerConfig.ACKS_CONFIG, "0");
         properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
-        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33_554_432);
         properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
 
         return properties;
@@ -109,7 +109,7 @@ public class KafkaProperties {
         properties.put(ProducerConfig.ACKS_CONFIG, "1");
         properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
-        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33_554_432);
         properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
 
         return properties;
@@ -129,8 +129,16 @@ public class KafkaProperties {
         properties.put(ProducerConfig.ACKS_CONFIG, "all");
         properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
-        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33_554_432);
         properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_2Config_1() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "0");
 
         return properties;
     }

@@ -1,4 +1,4 @@
-package pl.damian.producer.infrastructure.configs;
+package pl.damian.producer.infrastructure.configs.case1;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +7,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import pl.damian.producer.domain.InternalEvent;
 import pl.damian.producer.infrastructure.KafkaProperties;
+import pl.damian.producer.infrastructure.configs.AbstractKafkaProducerConfigurationCaseConfig;
 
 import java.util.Map;
 

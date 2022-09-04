@@ -12,6 +12,6 @@ public interface OfferMessageConst {
 
     interface Topics {
 //        String MESSAGE_READ_EVENTS = "test-topic-100";
-        String MESSAGE_READ_EVENTS = "case_1_config_1";
+        String MESSAGE_READ_EVENTS = "case_1_config_6";
     }
 }

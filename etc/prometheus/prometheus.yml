@@ -24,7 +24,7 @@ scrape_configs:
     # metrics_path defaults to '/metrics'
     static_configs:
 #      - targets: ['jmx-kafka101:5556','jmx-kafka102:5556', 'jmx-kafka103:5556']
-      - targets: ['jmx-kafka101:5556']
+      - targets: ['jmx-kafka102:5556']
 
   - job_name: 'kafka-producer'
     metrics_path: '/actuator/prometheus'

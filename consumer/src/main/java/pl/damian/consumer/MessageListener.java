@@ -21,7 +21,7 @@ class MessageListener {
 
     OfferMessageConsumer offerMessageConsumer;
 
-    @KafkaListener(topics = MESSAGE_READ_EVENTS, groupId = MESSAGE_READ_GROUP, containerFactory = MESSAGE_READ_LISTENER_CONTAINER_FACTORY)
+    @KafkaListener(topics = {MESSAGE_READ_EVENTS, "case_1_config_7"}, groupId = MESSAGE_READ_GROUP, containerFactory = MESSAGE_READ_LISTENER_CONTAINER_FACTORY)
     public void handleMessage(MessageEvent event) {
 
         log.info("[READ MESSAGE] message {}", event.toString());

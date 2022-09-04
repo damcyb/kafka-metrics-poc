@@ -1,4 +1,4 @@
-package pl.damian.producer.infrastructure.publishers;
+package pl.damian.producer.infrastructure.publishers.case1;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +9,10 @@ import org.apache.kafka.common.KafkaException;
 import org.springframework.kafka.core.KafkaTemplate;
 import pl.damian.producer.domain.EventPublisher;
 import pl.damian.producer.domain.InternalEvent;
+
+import java.math.BigInteger;
+import java.time.Duration;
+import java.time.Instant;
 
 import static pl.damian.producer.infrastructure.OfferMessageConst.Topics.case_1_config_9;
 
@@ -21,9 +25,18 @@ public class KafkaEventPublisherCase1Config9 implements EventPublisher<InternalE
 
     @Override
     public void send(InternalEvent event) {
+        BigInteger number = new BigInteger("10000000");
         try {
-            final var producerRecord = new ProducerRecord<>(case_1_config_9, event.getKey(), event);
-            kafkaTemplateCase1Config9.send(producerRecord);
+            Instant start = Instant.now();
+
+            for (int i = 0; i < number.intValue(); i++) {
+                final var producerRecord = new ProducerRecord<>(case_1_config_9, event.getKey(), event);
+                kafkaTemplateCase1Config9.send(producerRecord);
+            }
+
+            Instant finish = Instant.now();
+            long timeElapsed = Duration.between(start, finish).toMillis();
+            log.info("Time Elapsed in ms: " + timeElapsed);
             log.info("Message was sent CASE1CONFIG9");
         } catch (KafkaException exception) {
             log.error("Error while sending async event to Kafka cluster", exception);

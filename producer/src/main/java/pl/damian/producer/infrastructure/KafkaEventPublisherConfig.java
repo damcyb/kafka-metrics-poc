@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
 import pl.damian.producer.domain.EventPublisher;
 import pl.damian.producer.domain.InternalEvent;
-import pl.damian.producer.infrastructure.publishers.*;
+import pl.damian.producer.infrastructure.publishers.case1.*;
 
 @Configuration
 public class KafkaEventPublisherConfig {
@@ -57,5 +57,9 @@ public class KafkaEventPublisherConfig {
     @Bean
     EventPublisher kafkaEventPublisherCase1Config9(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config9) {
         return new KafkaEventPublisherCase1Config9(kafkaTemplateCase1Config9);
+    }
+    @Bean
+    EventPublisher kafkaEventPublisherCase2Config1(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase2Config1) {
+        return new KafkaEventPublisherCase1Config9(kafkaTemplateCase2Config1);
     }
 }
