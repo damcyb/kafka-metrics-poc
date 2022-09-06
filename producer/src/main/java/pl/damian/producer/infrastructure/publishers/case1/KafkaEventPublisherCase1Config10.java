@@ -13,33 +13,40 @@ import pl.damian.producer.domain.InternalEvent;
 import java.math.BigInteger;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.concurrent.ExecutionException;
 
-import static pl.damian.producer.infrastructure.OfferMessageConst.Topics.case_1_config_1;
+import static pl.damian.producer.infrastructure.OfferMessageConst.Topics.case_1_config_10;
+
 
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class KafkaEventPublisherCase1Config1 implements EventPublisher<InternalEvent> {
+public class KafkaEventPublisherCase1Config10 implements EventPublisher<InternalEvent> {
 
-    KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config1;
+    KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config10;
 
     @Override
     public void send(InternalEvent event) {
-        BigInteger number = new BigInteger("1000000");
+        BigInteger number = new BigInteger("100000");
         try {
             Instant start = Instant.now();
 
             for (int i = 0; i < number.intValue(); i++) {
-                final var producerRecord = new ProducerRecord<>(case_1_config_1, event.getKey(), event);
-                kafkaTemplateCase1Config1.send(producerRecord);
+                final var producerRecord = new ProducerRecord<>(case_1_config_10, event.getKey(), event);
+                var sendResult = kafkaTemplateCase1Config10.send(producerRecord);
+                kafkaTemplateCase1Config10.flush();
+                sendResult.get();
             }
 
             Instant finish = Instant.now();
             long timeElapsed = Duration.between(start, finish).toMillis();
             log.info("Time Elapsed in ms: " + timeElapsed);
 //            log.info("Send " + number.divide(new BigInteger(String.valueOf(timeElapsed))).multiply(new BigInteger("1000")) + " messages per second");
-            log.info("Message was sent CASE1CONFIG1");
-        } catch (KafkaException exception) {
+            log.info("Message was sent CASE1CONFIG10");
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+            log.error("Sending interrupted", e);
+        } catch (KafkaException | ExecutionException exception) {
             log.error("Error while sending async event to Kafka cluster", exception);
         }
     }

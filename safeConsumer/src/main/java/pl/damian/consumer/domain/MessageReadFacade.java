@@ -22,7 +22,7 @@ public class MessageReadFacade implements MessageReadConsumer {
         final var messageRead = MessageRead.fromMessageEvent(event);
 
         if (hasEventBeenAlreadyProcessed(messageRead)) {
-            log.info("Message has been already processed: {}", event.getEventId());
+//            log.info("Message has been already processed: {}", event.getEventId());
             return;
         }
 

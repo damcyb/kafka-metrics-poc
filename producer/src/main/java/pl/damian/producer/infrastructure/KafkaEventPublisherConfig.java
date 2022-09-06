@@ -59,7 +59,19 @@ public class KafkaEventPublisherConfig {
         return new KafkaEventPublisherCase1Config9(kafkaTemplateCase1Config9);
     }
     @Bean
-    EventPublisher kafkaEventPublisherCase2Config1(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase2Config1) {
-        return new KafkaEventPublisherCase1Config9(kafkaTemplateCase2Config1);
+    EventPublisher kafkaEventPublisherCase1Config10(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config10) {
+        return new KafkaEventPublisherCase1Config10(kafkaTemplateCase1Config10);
+    }
+    @Bean
+    EventPublisher kafkaEventPublisherCase1Config11(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config11) {
+        return new KafkaEventPublisherCase1Config11(kafkaTemplateCase1Config11);
+    }
+    @Bean
+    EventPublisher kafkaEventPublisherCase1Config12(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config12) {
+        return new KafkaEventPublisherCase1Config12(kafkaTemplateCase1Config12);
+    }
+    @Bean
+    EventPublisher kafkaEventPublisherCase1Config13(final KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config13) {
+        return new KafkaEventPublisherCase1Config13(kafkaTemplateCase1Config13);
     }
 }

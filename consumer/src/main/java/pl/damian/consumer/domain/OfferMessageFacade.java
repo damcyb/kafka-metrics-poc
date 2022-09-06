@@ -14,8 +14,8 @@ public class OfferMessageFacade implements OfferMessageConsumer {
 
     @Override
     public void consume(MessageEvent event) {
-        final var offerMessage = OfferMessage.fromMessageEvent(event);
-        processMessage(offerMessage);
+//        final var offerMessage = OfferMessage.fromMessageEvent(event);
+//        processMessage(offerMessage);
     }
 
     private void processMessage(final OfferMessage offerMessage) {

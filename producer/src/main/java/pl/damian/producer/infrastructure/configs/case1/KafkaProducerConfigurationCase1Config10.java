@@ -1,4 +1,4 @@
-package pl.damian.producer.infrastructure.configs.case2;
+package pl.damian.producer.infrastructure.configs.case1;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +13,14 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaProducerConfigurationCase2Config2 extends AbstractKafkaProducerConfigurationCaseConfig {
+public class KafkaProducerConfigurationCase1Config10 extends AbstractKafkaProducerConfigurationCaseConfig {
 
-    public KafkaProducerConfigurationCase2Config2(KafkaProperties kafkaProperties) {
+    public KafkaProducerConfigurationCase1Config10(KafkaProperties kafkaProperties) {
         super(kafkaProperties);
     }
 
     @Override
-    @Bean("kafkaTemplateCase2Config2")
+    @Bean("kafkaTemplateCase1Config10")
     public KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config() {
         return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(getProducerConfig()));
     }
@@ -28,7 +28,7 @@ public class KafkaProducerConfigurationCase2Config2 extends AbstractKafkaProduce
     @Override
     protected final Map<String, Object> getProducerConfig() {
         final Map<String, Object> properties = getDefaultProducerConfig();
-        properties.putAll(kafkaProperties.getSettingsForCase_2Config_2());
+        properties.putAll(kafkaProperties.getSettingsForCase_1Config_10());
 
         return properties;
     }

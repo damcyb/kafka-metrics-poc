@@ -135,7 +135,7 @@ public class KafkaProperties {
         return properties;
     }
 
-    public Map<String, Object> getSettingsForCase_2Config_1() {
+    public Map<String, Object> getSettingsForCase_1Config_10() {
         final Map<String, Object> properties = new HashMap<>();
 
         properties.put(ProducerConfig.ACKS_CONFIG, "1");
@@ -143,11 +143,34 @@ public class KafkaProperties {
         return properties;
     }
 
-    public Map<String, Object> getSettingsForCase_2Config_2() {
+    public Map<String, Object> getSettingsForCase_1Config_11() {
         final Map<String, Object> properties = new HashMap<>();
 
-        properties.put(ProducerConfig.ACKS_CONFIG, "1");
+        properties.put(ProducerConfig.ACKS_CONFIG, "all");
+//        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_1Config_12() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "all");
         properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
+        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
+
+        return properties;
+    }
+
+    public Map<String, Object> getSettingsForCase_1Config_13() {
+        final Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.ACKS_CONFIG, "0");
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32_768);
+        properties.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33_554_432);
+        properties.put(ProducerConfig.LINGER_MS_CONFIG, 2);
+        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 10);
 
         return properties;
     }

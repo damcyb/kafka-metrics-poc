@@ -1,4 +1,4 @@
-package pl.damian.producer.infrastructure.publishers.case2;
+package pl.damian.producer.infrastructure.publishers.case1;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -13,39 +13,34 @@ import pl.damian.producer.domain.InternalEvent;
 import java.math.BigInteger;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.concurrent.ExecutionException;
 
-import static pl.damian.producer.infrastructure.OfferMessageConst.Topics.case_2_config_1;
+import static pl.damian.producer.infrastructure.OfferMessageConst.Topics.case_1_config_13;
 
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class KafkaEventPublisherCase2Config1 implements EventPublisher<InternalEvent> {
+public class KafkaEventPublisherCase1Config13 implements EventPublisher<InternalEvent> {
 
-    KafkaTemplate<String, InternalEvent> kafkaTemplateCase2Config1;
+    KafkaTemplate<String, InternalEvent> kafkaTemplateCase1Config13;
 
     @Override
     public void send(InternalEvent event) {
-        BigInteger number = new BigInteger("10000000");
+        BigInteger number = new BigInteger("1000000");
         try {
             Instant start = Instant.now();
 
             for (int i = 0; i < number.intValue(); i++) {
-                final var producerRecord = new ProducerRecord<>(case_2_config_1, event.getKey(), event);
-                var sendResult = kafkaTemplateCase2Config1.send(producerRecord);
-                kafkaTemplateCase2Config1.flush();
-                sendResult.get();
+                final var producerRecord = new ProducerRecord<>(case_1_config_13, event.getKey(), event);
+                kafkaTemplateCase1Config13.send(producerRecord);
+
             }
 
             Instant finish = Instant.now();
             long timeElapsed = Duration.between(start, finish).toMillis();
             log.info("Time Elapsed in ms: " + timeElapsed);
 //            log.info("Send " + number.divide(new BigInteger(String.valueOf(timeElapsed))).multiply(new BigInteger("1000")) + " messages per second");
-            log.info("Message was sent CASE2CONFIG1");
-        } catch (final InterruptedException e) {
-            Thread.currentThread().interrupt();
-            log.error("Sending interrupted", e);
-        } catch (KafkaException | ExecutionException exception) {
+            log.info("Message was sent CASE1CONFIG13");
+        } catch (KafkaException exception) {
             log.error("Error while sending async event to Kafka cluster", exception);
         }
     }
