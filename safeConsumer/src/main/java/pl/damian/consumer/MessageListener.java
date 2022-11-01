@@ -55,6 +55,5 @@ class MessageListener {
             System.out.println("Elapsed time: " + Duration.between(startTime, Instant.now()).toMillis());
             counter = 0L;
         }
-
     }
 }

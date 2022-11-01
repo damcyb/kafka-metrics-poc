@@ -25,7 +25,7 @@ class MessageListener {
 
     OfferMessageConsumer offerMessageConsumer;
     @NonFinal Long counter = 0L;
-    Long limit = 1000000L;
+    Long limit = 200_000L;
     @NonFinal Instant startTime;
 
 

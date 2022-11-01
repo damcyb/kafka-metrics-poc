@@ -71,7 +71,7 @@ class KafkaConsumerConfiguration {
         properties.put(JsonDeserializer.KEY_DEFAULT_TYPE, String.class);
         properties.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
 
-        properties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 10000);
+        properties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 100);
         properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
         properties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 5000);
 

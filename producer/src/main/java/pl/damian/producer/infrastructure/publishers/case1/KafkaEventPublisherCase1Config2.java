@@ -26,7 +26,7 @@ public class KafkaEventPublisherCase1Config2 implements EventPublisher<InternalE
     @Override
     public void send(InternalEvent event) {
 
-            BigInteger number = new BigInteger("10000");
+            BigInteger number = new BigInteger("500000");
             try {
                 Instant start = Instant.now();
 
